@@ -13,12 +13,14 @@ export default function FriendsList() {
       }
     })
       .then(res => setData(res.data))
-      .catch(err => console.error(err))
+      .catch(err => {
+        console.log("FriendsList Error...")
+        console.error(err);
+      })
   }, []);
 
   return (
     <>
-      <div>FriendsList</div>
       <ul>
         {
           data.map((friend, idx) => {
@@ -29,6 +31,5 @@ export default function FriendsList() {
         }
       </ul>
     </>
-
   )
 }

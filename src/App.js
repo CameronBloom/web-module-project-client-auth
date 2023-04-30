@@ -5,8 +5,10 @@ import Login from './components/Login';
 import FriendsList from './components/FriendsList';
 import AddFriend from './components/AddFriend';
 import Logout from './components/Logout';
+import Protected from './components/Protected';
 
 function App() {
+
   return (
       <div className="App">
         <h2>Client Auth Project</h2>
@@ -23,9 +25,30 @@ function App() {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/friends" element={<FriendsList />} />
-          <Route path="/friends/add" element={<AddFriend />} />
-          <Route path="/logout" element={<Logout />} />
+          <Route 
+            path="/friends" 
+            element={
+              <Protected token={localStorage.getItem("token")}>
+                <FriendsList />
+              </Protected>
+            } 
+          />
+          <Route 
+            path="/friends/add" 
+            element={
+              <Protected token={localStorage.getItem("token")}>
+                <AddFriend />
+              </Protected>
+            } 
+          />
+                    <Route 
+            path="/logout" 
+            element={
+              <Protected token={localStorage.getItem("token")}>
+                <Logout />
+              </Protected>
+            } 
+          />
         </Routes>
       </div>
 

@@ -19,10 +19,14 @@ export default function Logout() {
         localStorage.removeItem("token");
         navigate("/");
       })
-      .catch(err => console.error(err))
+      .catch(err => { 
+        console.log("Logout Error...")
+        console.error(err);
+        navigate("/");
+      })
   }, []);
 
   return (
-    <div>Cam</div>
+    <div></div>
   )
 }
