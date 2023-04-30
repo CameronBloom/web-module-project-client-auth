@@ -1,7 +1,10 @@
 import React from "react"
 import { useState } from "react"
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
+  const navigate = useNavigate();
   const [auth, setAuth] = useState({ username:"", password:"" });
 
   const handleChange = (e) => {
@@ -13,13 +16,18 @@ export default function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(auth)
+    axios.post("http://localhost:9000/api/login", auth)
+      .then(res => {
+        localStorage.setItem("token", res.data["token"]);
+        navigate("/friends");
+      })
+      .catch(err => console.error(err))
   }
 
   return (
     <div>
       <h1>Login</h1>
-      <form>
+      <form onSubmit={ handleSubmit }>
         <div>
           <label htmlFor="username">Username:</label>
           <input type="text" id="username" name="username" onChange={ handleChange }></input>
@@ -28,7 +36,9 @@ export default function Login() {
           <label htmlFor="username">Password:</label>
           <input type="text" id="password" name="password" onChange={ handleChange }></input>
         </div>
-        <button onClick={ handleSubmit }>Login</button>
+        <button
+          disabled={ auth.username.length < 1 || auth.password.length < 1 }
+        >Login</button>
       </form>
     </div>
   )

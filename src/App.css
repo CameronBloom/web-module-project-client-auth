@@ -36,3 +36,28 @@
     transform: rotate(360deg);
   }
 }
+
+/* personal CSS */
+header {
+  color: blueviolet;
+
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  align-items: center;
+}
+.link-container {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  align-items: center;
+  
+}
+.link {
+  color: white;
+  font-size: 1.6rem;
+  padding: 1rem;
+  margin: 1rem;
+  text-decoration: none;
+  background-color: black;
+}
